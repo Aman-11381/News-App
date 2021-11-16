@@ -1,11 +1,12 @@
-import 'package:cached_network_image/cached_network_image.dart';
+// ignore: import_of_legacy_library_into_null_safe
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:news_app/helper/data.dart';
 import 'package:news_app/helper/news.dart';
 import 'package:news_app/models/article_model.dart';
 import 'package:news_app/models/category_model.dart';
-import 'package:news_app/views/article_view.dart';
+import 'package:news_app/widgets/category_tile.dart';
+import 'package:news_app/widgets/news_tile.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -29,7 +30,6 @@ class _HomeState extends State<Home> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
 
     categories = getCategories();
@@ -103,104 +103,3 @@ class _HomeState extends State<Home> {
   }
 }
 
-class CategoryTile extends StatelessWidget {
-  final imageUrl, categoryName;
-
-  CategoryTile({@required this.imageUrl, @required this.categoryName});
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {},
-      child: Container(
-        margin: EdgeInsets.only(right: 16),
-        child: Stack(
-          children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(6),
-              child: CachedNetworkImage(
-                imageUrl: imageUrl,
-                width: 120.0,
-                height: 60.0,
-                fit: BoxFit.cover,
-              ),
-            ),
-            Container(
-              alignment: Alignment.center,
-              width: 120.0,
-              height: 60.0,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(6),
-                color: Colors.black54,
-              ),
-              child: Text(
-                categoryName,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w500,
-                  fontSize: 14,
-                ),
-              ),
-            )
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class NewsTile extends StatelessWidget {
-  final imageUrl, title, description, url;
-
-  NewsTile(
-      {@required this.imageUrl,
-      @required this.title,
-      @required this.description,
-      @required this.url});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(bottom: 16),
-      child: Column(
-        children: [
-          ClipRRect(
-              borderRadius: BorderRadius.circular(6),
-              child: Image.network(imageUrl)),
-          SizedBox(
-            height: 8,
-          ),
-          GestureDetector(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => ArticleView(
-                    url: url,
-                  ),
-                ),
-              );
-            },
-            child: Text(
-              title,
-              style: TextStyle(
-                fontWeight: FontWeight.w500,
-                color: Colors.black87,
-                fontSize: 18,
-              ),
-            ),
-          ),
-          SizedBox(
-            height: 6,
-          ),
-          Text(
-            description,
-            style: TextStyle(
-              color: Colors.black54,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
