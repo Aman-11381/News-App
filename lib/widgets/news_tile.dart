@@ -51,6 +51,14 @@ class NewsTile extends StatelessWidget {
               color: Colors.black54,
             ),
           ),
+          SizedBox(
+            height: 10.0,
+          ),
+          Divider(
+            height: 18.0,
+            color: Colors.black26,
+            thickness: 0.8,
+          ),
         ],
       ),
     );
